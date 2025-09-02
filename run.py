@@ -95,7 +95,11 @@ if __name__ == "__main__":
                 # Block 
                 if non_submitters:
                     # send email bla bla
-                    body = f"The names of those who didn't respond to the KPI progress emails for the date {date_of_report}, are as follows: {", ".join(non_submitters)}"
+                    #body = f"The names of those who didn't respond to the KPI progress emails for the date {date_of_report}, are as follows: {", ".join(non_submitters)}"
+                    body = f"""The names of those who didn't respond to the KPI progress emails are as follows: {", ".join(non_submitters)}. 
+                    
+                    The name of their manager is {manager}. Please use this info to personalize the message you want to send"""
+                    
                     to = get_staff_email_by_username(session, manager)
                     subject = f"This weeks Non-responders {date_of_report}"
                     
