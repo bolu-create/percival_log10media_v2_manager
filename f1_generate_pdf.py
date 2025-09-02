@@ -45,10 +45,10 @@ def format_as_html_email_with_ai(raw_text):
                     
                     add the ffg to the <style> tag </style>
                       @page {
-                        margin-top: 30px;
+                        margin-top: 50px;
                         margin-left: 50px;
                         margin-right:50px;
-                        margin-bottom: 30px;   
+                        margin-bottom: 50px;   
                       }
 
                       .watermark {

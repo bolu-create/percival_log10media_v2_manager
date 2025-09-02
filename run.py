@@ -4,7 +4,8 @@ from get_manager_2_data_prep import manager_breakdown
 from get_manager_3_final_report import department_report
 from f1_generate_pdf import clean_markdown_html_block, format_as_html_email_with_ai
 from f2_send_email import send_email_to_staff, generate_pdf_from_html
-from functions import get_manager_usernames, add_company_report, add_manager_report, get_staff_email_by_username
+from functions import get_manager_usernames, add_company_report, add_manager_report, get_staff_email_by_username, get_kpi_report_stats_latest, get_user_id_by_username, get_staff_under_manager
+from f3_email_manager_on_staff import send_email_to_staff_for_no_response
 
 
 
@@ -50,20 +51,56 @@ def run_code(session, manager_name):
     session.close()
     
     
-    
 
 if __name__ == "__main__":
     # Code to run when file is executed directly
-    managers= get_manager_usernames(session)
-
-    print(managers)
-    for manager in managers:
-        #if manager:
-        if manager == "Boluwatife M":
-            run_code(session, manager)
-            print(f"DONE with Manager {manager}")
+    now = datetime.today()
+    day = now.strftime("%A")  # e.g., 'Friday', 'Saturday', etc.
+    hour = now.hour  # UTC hour
+    
+    if day:
+    #if day == "Friday" and hour == 12:
+        managers= get_manager_usernames(session)
+        print(managers)
+        for manager in managers:
             
-    print("DONE with all Managers")
+            #if manager:
+            if manager == "Boluwatife M":
+                                
+                run_code(session, manager)
+                print(f"DONE with Manager {manager}")
+                
+                
+                # After run_code has done its own thing, lets check for those who didn't submit
+                staffs = get_staff_under_manager(session, manager)
+                non_submitters = []
+                date_of_report = ""
+                
+                # Block 
+                if isinstance(staffs, list):
+                    for staff in staffs:
+                        user_id= get_user_id_by_username(session, staff)
+                        
+                        submitted, date_of_report = get_kpi_report_stats_latest(session, user_id)
+                        if submitted:
+                            pass
+                        else:
+                            non_submitters.append(staff)         
+                else:
+                    pass
+                
+                # Block 
+                if non_submitters:
+                    # send email bla bla
+                    body = f"The names of those who didn't respond to the KPI progress emails for the date {date_of_report}, are as follows: {", ".join(non_submitters)}"
+                    to = get_staff_email_by_username(session, manager)
+                    subject = f"This weeks Non-responders {date_of_report}"
+                    
+                    send_email_to_staff_for_no_response(to, subject, body)
+                else:
+                    pass
+                    
+        print("DONE with all Managers")
     
 
 #deploy string
