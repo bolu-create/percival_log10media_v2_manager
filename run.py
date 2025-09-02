@@ -4,8 +4,11 @@ from get_manager_2_data_prep import manager_breakdown
 from get_manager_3_final_report import department_report
 from f1_generate_pdf import clean_markdown_html_block, format_as_html_email_with_ai
 from f2_send_email import send_email_to_staff, generate_pdf_from_html
-from functions import get_manager_usernames, add_company_report, add_manager_report, get_staff_email_by_username, get_kpi_report_stats_latest, get_user_id_by_username, get_staff_under_manager
+from functions import get_manager_usernames, add_company_report, add_manager_report, get_staff_email_by_username, get_user_id_by_username#, get_staff_under_manager
 from f3_email_manager_on_staff import send_email_to_staff_for_no_response
+
+from functions2 import get_kpi_report_stats_latest, get_staff_under_manager # These weren't importing from "functions" Don't know why
+
 
 
 
