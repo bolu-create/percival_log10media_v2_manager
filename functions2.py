@@ -71,4 +71,6 @@ def get_staff_under_manager(session, manager_username: str):
         return f"ℹ️ Manager '{manager_username}' has no staff assigned."
     
     # Return list of staff names (prefer fullname, fallback to username)
-    return [s.fullname or s.username for s in staff_members]
+    #return [s.fullname or s.username for s in staff_members]
+    return [s.username for s in staff_members]
+    
