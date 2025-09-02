@@ -101,7 +101,7 @@ if __name__ == "__main__":
                     The name of their manager is {manager}. Please use this info to personalize the message you want to send"""
                     
                     to = get_staff_email_by_username(session, manager)
-                    subject = f"This weeks Non-responders {date_of_report}"
+                    subject = f"Pending Submissions for This Week" #{date_of_report}"
                     
                     send_email_to_staff_for_no_response(to, subject, body)
                 else:
