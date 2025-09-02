@@ -16,6 +16,7 @@ google-cloud-aiplatform
 langchain-google-community[gmail]
 langchain[openai]
 langgraph
-SQLAlchemy==2.0.29
+#SQLAlchemy==2.0.29
+SQLAlchemy>=2.0.34
 xhtml2pdf
 python-docx
