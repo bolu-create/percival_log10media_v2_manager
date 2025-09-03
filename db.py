@@ -153,6 +153,20 @@ class User(Base):
     country = Column(Text) #New important addition !!!!!!! Please Update!
     created_at = Column(DateTime, default=datetime.utcnow)
     password = Column(String(255), nullable=False) #New Here. Needs Important Attention !!!!!!!!
+    
+    status = Column(
+    Enum(
+        "active",        # currently working
+        "inactive",      # temporarily not active
+        "suspended",     # blocked from system
+        "terminated",    # forcefully removed
+        "probation",     # new staff under evaluation
+        "former",        # resigned OR retired (no longer employed)
+        name="user_statuses"
+    ),
+    default="active",
+    nullable=False
+    )
 
     company = relationship("Company", backref="users")
     # Updated relationship: 
@@ -161,6 +175,27 @@ class User(Base):
         secondary=user_departments,  # use the association table
         back_populates="users"
     )
+
+
+
+
+# AGENT PERSONALITY. YET TO BE USED IN CODE
+class AgentPersonality(Base):
+    __tablename__ = "agent_personalities"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False, unique=True)
+
+    # Flexible: can be one of the defaults ("professional", "fun", etc.)
+    # OR any custom free text the user wants
+    personality = Column(String(255), default="professional", nullable=False)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    user = relationship("User", backref="agent_personality")
+
+    def __repr__(self):
+        return f"<AgentPersonality(user_id={self.user_id}, personality='{self.personality}')>"
+
+
 
 
 

@@ -1,0 +1,5 @@
+Providing managers the ability to describe and select the character of their AI responses i.e the report
+    - Do this by setting up a seperate table for it. 
+    - Then storing their choice/responses
+    - The using it the "instructions" var of the responses API
+       

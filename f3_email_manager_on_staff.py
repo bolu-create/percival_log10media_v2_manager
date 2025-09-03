@@ -86,6 +86,10 @@ def emailer(statement):
                 - You are to keep the message short and as straight to the point as possible. Avoid making it wordy and lengthy. Just inform the manager and give your recommendations.
                 - You will be given the managers name, so use it to personalize the content of the email
                 - Under no circumstance should you include a subject, you are only required to give the body.
+                - Also you are not to suggest or offer the manager any subsequent support in fulfilling their managerial roles, you are simply to:
+                    a. Inform them of thosewho have not submitted
+                    b. Give recommendations 
+                    Note: Avoid statements like "
                 
                 Now the names of the staffs will be given to you. Compose the remainder of the message as instructed. 
          

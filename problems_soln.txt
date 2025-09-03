@@ -1,0 +1,4 @@
+AssertionError: Class <class 'sqlalchemy.sql.elements.SQLCoreOperations'> directly inherits TypingOnly but has additional attributes {'__firstlineno__', '__static_attributes__'}.
+    - This error was gotten on render. Happens when deploying
+    - The fix is to simply set SQLAlchemy in requirements.txt to SQLAlchemy>=2.0.34
+    - It happens due to renders python 3-13 version not being compatible with Lower SQLAlchemy versions 

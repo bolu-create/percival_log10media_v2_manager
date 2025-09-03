@@ -61,15 +61,19 @@ if __name__ == "__main__":
     day = now.strftime("%A")  # e.g., 'Friday', 'Saturday', etc.
     hour = now.hour  # UTC hour
     
-    # SEND REMINDER
-    #if day:
-    if day == "Saturday" and hour == 7:
+    if day:
+    #if day == "Friday" and hour == 12:
         managers= get_manager_usernames(session)
         print(managers)
         for manager in managers:
             
             #if manager:
-            if manager == "Boluwatife M":                
+            if manager == "Boluwatife M":
+                                
+                run_code(session, manager)
+                print(f"DONE with Manager {manager}")
+                
+                
                 # After run_code has done its own thing, lets check for those who didn't submit
                 staffs = get_staff_under_manager(session, manager)
                 non_submitters = []
@@ -103,21 +107,6 @@ if __name__ == "__main__":
                 else:
                     pass
                     
-        print("DONE with all Managers")
-        
-        
-        
-    # GENERATE REPORT
-    if day == "Monday" and hour == 6:
-        managers= get_manager_usernames(session)
-        print(managers)
-        for manager in managers:
-            
-            #if manager:
-            if manager == "Boluwatife M":                  
-                run_code(session, manager)
-                print(f"DONE with Manager {manager}")
-                
         print("DONE with all Managers")
     
 
