@@ -68,8 +68,8 @@ if __name__ == "__main__":
         print(managers)
         for manager in managers:
             
-            #if manager:
-            if manager == "Boluwatife M":                
+            if manager:
+            #if manager == "Boluwatife M":                
                 # After run_code has done its own thing, lets check for those who didn't submit
                 staffs = get_staff_under_manager(session, manager)
                 non_submitters = []
@@ -113,8 +113,8 @@ if __name__ == "__main__":
         print(managers)
         for manager in managers:
             
-            #if manager:
-            if manager == "Boluwatife M":                  
+            if manager:
+            #if manager == "Boluwatife M":                  
                 run_code(session, manager)
                 print(f"DONE with Manager {manager}")
                 
