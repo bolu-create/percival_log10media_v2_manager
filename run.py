@@ -108,7 +108,7 @@ if __name__ == "__main__":
         
         
     # GENERATE REPORT
-    if day == "Monday" and hour == 10:
+    if day == "Monday" and hour == 6:
         managers= get_manager_usernames(session)
         print(managers)
         for manager in managers:
