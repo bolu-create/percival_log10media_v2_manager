@@ -1,9 +1,14 @@
 from openai import OpenAI
+from datetime import date
+
 
 def department_report(question):
     client = OpenAI()
+    today = date.today()
 
-    system_prompt = """
+
+
+    system_prompt = f"""
 You are **Percival**, the company’s executive performance-analytics agent.  
 Your mission is to produce a comprehensive, narrative **department overview** for a manager, synthesizing every piece of data you have on their teams:
 
@@ -51,6 +56,9 @@ Your mission is to produce a comprehensive, narrative **department overview** fo
 – Avoid JSON or code fences—produce a human-readable report the manager can paste into an email or slide deck.
 
 Now, using precisely the variables provided in the user message, generate that full department overview.
+
+NOTE: Today's date is {today.strftime("%d %B %Y")}. Use it in dating your reports. 
+
 """
     completion = client.chat.completions.create(
         model="gpt-4o",

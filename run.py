@@ -48,7 +48,7 @@ def run_code(session, manager_name):
     
     # Next I NEED A FUNCITON THAT CAN GET THE USER EMAIL
     
-    if manager_name == "Boluwatife M":
+    if manager_name:  #!= "Boluwatife M":
         send_email_to_staff(to, subject, body, pdf_path)
         
     session.close()
@@ -108,7 +108,7 @@ if __name__ == "__main__":
         
         
     # GENERATE REPORT
-    if day == "Monday" and hour == 6:
+    if day == "Monday" and hour == 10:
         managers= get_manager_usernames(session)
         print(managers)
         for manager in managers:
