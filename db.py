@@ -144,7 +144,7 @@ class User(Base):
     phone_number = Column(String(255), unique=True) #new adition for phone numbers
     username = Column(String(100), unique=True, nullable=False)
     fullname = Column(String(100), nullable=False)
-    role = Column(Enum('manager', 'staff', name='user_roles'))
+    role = Column(Enum('administrator','manager', 'staff', name='user_roles'))
     job_title = Column(String(100))
     job_description = Column(Text)
     job_level = Column(String(50))
@@ -400,8 +400,6 @@ Base.metadata.create_all(engine)
 # Bind sessionmaker and create session
 Session = sessionmaker(bind=engine)
 session = Session()
-
-
 
 
 

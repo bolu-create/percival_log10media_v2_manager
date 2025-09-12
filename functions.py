@@ -11,14 +11,46 @@ def get_staff_email_by_username(session, username: str) -> str | None:
     return user.email if user else None
 
 
-
+"""
 def get_manager_usernames(session) -> list[str]:
-    """
+    "#""
     Fetches all usernames for users who are managers.
-    """
+    "#""
     managers = session.query(User.username).filter(User.role == 'manager').all()
     # managers is a list of tuples like [('Alice',), ('Bob',)]
     return [username for (username,) in managers]
+"""
+def get_manager_usernames(session) -> list[str]:
+    """
+    Fetch usernames of all users who are actual managers in the LineManagerStaff map.
+    This ensures we only return managers that are linked to staff, even if managers
+    themselves have managers above them.
+    """
+    from sqlalchemy.orm import aliased
+
+    # Aliases for clarity
+    Manager = aliased(User)
+    Staff = aliased(User)
+
+    # Join LineManagerStaff -> Manager -> Staff
+    managers = (
+        session.query(Manager.username)
+        .join(LineManagerStaff, LineManagerStaff.manager_id == Manager.id)
+        .join(Staff, LineManagerStaff.staff_id == Staff.id)
+        .filter(Manager.role.in_(["manager", "staff"]))  # managers who can also be managed
+        .distinct()
+        .all()
+    )
+
+    # managers comes back like [('Alice',), ('Bob',)] → flatten
+    return [username for (username,) in managers]
+
+
+
+
+
+
+
 
 
 
