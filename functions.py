@@ -22,9 +22,9 @@ def get_manager_usernames(session) -> list[str]:
 """
 def get_manager_usernames(session) -> list[str]:
     """
-    Fetch usernames of all users who are actual managers in the LineManagerStaff map.
-    This ensures we only return managers that are linked to staff, even if managers
-    themselves have managers above them.
+    Fetch usernames of all users who act as managers in the LineManagerStaff map.
+    This now includes administrators (who can manage managers), managers,
+    and staff who are themselves mapped as managers of others.
     """
     from sqlalchemy.orm import aliased
 
@@ -32,17 +32,16 @@ def get_manager_usernames(session) -> list[str]:
     Manager = aliased(User)
     Staff = aliased(User)
 
-    # Join LineManagerStaff -> Manager -> Staff
     managers = (
         session.query(Manager.username)
         .join(LineManagerStaff, LineManagerStaff.manager_id == Manager.id)
         .join(Staff, LineManagerStaff.staff_id == Staff.id)
-        .filter(Manager.role.in_(["manager", "staff"]))  # managers who can also be managed
+        .filter(Manager.role.in_(["administrator", "manager", "staff"]))
         .distinct()
         .all()
     )
 
-    # managers comes back like [('Alice',), ('Bob',)] → flatten
+    # flatten results from [('Alice',), ('Bob',)] → ['Alice', 'Bob']
     return [username for (username,) in managers]
 
 
