@@ -55,6 +55,10 @@ def run_code(session, manager_name):
     
     
 
+
+
+
+
 if __name__ == "__main__":
     # Code to run when file is executed directly
     now = datetime.today()
@@ -108,14 +112,14 @@ if __name__ == "__main__":
         
         
     # GENERATE REPORT
-    if day == "Monday" and hour == 8:
+    if day == "Monday" and hour == 6:
         managers= get_manager_usernames(session)
         print(managers)
         for manager in managers:
             
-            #if manager:
+            if manager:
             #if manager == "Boluwatife M":
-            if manager == "Chuks":                                       
+            #if manager == "Chuks":                                       
                 run_code(session, manager)
                 print(f"DONE with Manager {manager}")
                 
