@@ -124,8 +124,8 @@ if __name__ == "__main__":
         print(managers)
         for manager in managers: 
             #if manager:
-            if manager == "Boluwatife M":
-            #if manager == "Chuks":                                       
+            #if manager == "Boluwatife M":
+            if manager == "Chuks":                                       
                 run_code(session, manager)
                 print(f"DONE with Manager {manager}")
                 
