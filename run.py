@@ -9,7 +9,10 @@ from f3_email_manager_on_staff import send_email_to_staff_for_no_response
 
 from functions2 import get_kpi_report_stats_latest, get_staff_under_manager # These weren't importing from "functions" Don't know why
 
+from datetime import date
 
+def get_today_date_str():
+    return date.today().strftime("%Y-%m-%d")
 
 
 def run_code(session, manager_name):
@@ -40,7 +43,10 @@ def run_code(session, manager_name):
     html_report = clean_markdown_html_block(format_as_html_email_with_ai(report))
     
     # Generate PDF and save it in a temporary file. Will have to replace with an S3 bucket later in the future
-    pdf_path = generate_pdf_from_html(html_report, filename="output.pdf")
+    todays_date = get_today_date_str()
+    pdf_name = f"{todays_date}_{manager_name}_manager_report.pdf"  
+    #pdf_path = generate_pdf_from_html(html_report, filename="output.pdf")
+    pdf_path = generate_pdf_from_html(html_report, filename=pdf_name)
     
     # convert to pdf and send as email attachment
     body = f"Hello {manager_name}, please find attached a report on the performance of your staffs"
@@ -113,12 +119,12 @@ if __name__ == "__main__":
         
     # GENERATE REPORT
     if day == "Monday" and hour == 6:
+    #if day == "Monday" and hour == 7:
         managers= get_manager_usernames(session)
         print(managers)
-        for manager in managers:
-            
-            if manager:
-            #if manager == "Boluwatife M":
+        for manager in managers: 
+            #if manager:
+            if manager == "Boluwatife M":
             #if manager == "Chuks":                                       
                 run_code(session, manager)
                 print(f"DONE with Manager {manager}")
