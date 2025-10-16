@@ -104,8 +104,16 @@ def manager_breakdown(session, overview):#,dept_name=None):
                     update_check = check_fulfilled_is_due(due_date, staff_fulfilled_kpi, staff_username, staff_score_updated_at)
                     user_id = get_user_id_by_username(session, staff_username)
                     total_reports, submitted_count, not_submitted_count, reminded_not_submitted_count, did_not_submit_count, latest_is_submitted = get_kpi_report_stats(session, user_id)
+                    #total_reports, submitted_count, not_submitted_count, reminded_not_submitted_count, did_not_submit_count, latest_is_submitted
                     
                     # The Kpi delivery date had already passed by the time this data was recorded. 
+                    """
+                    KPI ASESSMENT OVER OVERALL PERIOD
+                        - The Staff has only fulfilled {staff_achieved_total} {unit} so far.
+                        - {kpi_name} is what is expected of the staff to achieve over a {period} period.
+                        - Has Staff hit the Kpi target? : {staff_KPI_finally_fulfilled}
+                    """
+                    
                     
                     my_string = f"""{staff_score_updated_at} PERFORMANCE REPORT AND REVIEW FOR: {staff_username}
                         
@@ -120,7 +128,7 @@ def manager_breakdown(session, overview):#,dept_name=None):
                         - The EXPECTED KPI value to be achieved in the breakdown period is: {kpi_breakdown_value}.
                     
                     KPI ASESSMENT OVER OVERALL PERIOD
-                        - The Staff has only fulfilled {staff_achieved_total} {unit} so far.
+                        - The Staff has only fulfilled {staff_achieved_total} so far.
                         - {kpi_name} is what is expected of the staff to achieve over a {period} period.
                         - Has Staff hit the Kpi target? : {staff_KPI_finally_fulfilled}
                     
@@ -135,15 +143,15 @@ def manager_breakdown(session, overview):#,dept_name=None):
                     upon request. Use this information to inform the manager of wether the staff replied to the most recent round of emails to send their KPI
                     progress feedback. 
                     
-                    total_reports, submitted_count, not_submitted_count, reminded_not_submitted_count, did_not_submit_count, latest_is_submitted
                     The total report requests sent so far: {total_reports}
                     The total number of reports responded to by {staff_username} out of the {total_reports} total reports requests: {submitted_count}
                     The total number of unsubmitted reports responded to: {not_submitted_count}
                     
-                    All of the above must be shown to the manager also and a rating or verdict should be given by you on how well the user responds to KPI report requests.
+                    ****
+                    But note the most important of this is noting if the most recent report request has been submitted. So please note that "{staff_username} {latest_is_submitted}" 
+                    ****
                     
-                    But note the most important of this is noting if the most recent report request has been submitted. 
-                    Update: "{staff_username} {latest_is_submitted}" 
+                    All of the above must be shown to the manager also and a rating or verdict should be given by you on how well the user responds to KPI report requests.
                     
                     if {staff_username} has not submitted in the above update. You need to clearly inform the manager about this as a topmost priority, so the manager can address it.
                     """  
@@ -167,8 +175,8 @@ def manager_breakdown(session, overview):#,dept_name=None):
                     {my_string}
                     """
                     # staff details are added to create list of their details
-                    #staff_data_scores_stories.append(staff_KPI_story)
-                                    
+                    # staff_data_scores_stories.append(staff_KPI_story)
+
                 else:
                     my_string_for_empty= f"There are no Performance Summary Information available just yet for the KPI {kpi_name} for {staff_username}"
                     
@@ -191,8 +199,6 @@ def manager_breakdown(session, overview):#,dept_name=None):
                     #staff_data_scores_stories.append(staff_KPI_story) 
                     #staffs_in_department_details.append(staff_story_no_performance_summary)
                 
-                
-    
                 # This helps reset the KPI counter 
                 if number_for_kpis_string_being_prepared == total_kpis_for_staff:
                     number_for_kpis_string_being_prepared = 0

@@ -142,7 +142,11 @@ def get_kpi_report_stats(session: Session, user_id: int):
                            .filter_by(user_id=user_id) \
                            .order_by(desc(KPIReportTracking.report_request_date)) \
                            .first()
+                           
+
+    
     latest_is_submitted = (latest_record.submitted == "submitted") if latest_record else False
+
 
     latest_is_submitted_str = ""
     if latest_is_submitted == True:

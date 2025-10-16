@@ -147,7 +147,7 @@ class User(Base):
     role = Column(Enum('administrator','manager', 'staff', name='user_roles'))
     job_title = Column(String(100))
     job_description = Column(Text)
-    job_level = Column(String(50))
+    job_level = Column(String(50)) #This needs to change !!!!!!
     cv_url = Column(String(255))
     
     country = Column(Text) #New important addition !!!!!!! Please Update!

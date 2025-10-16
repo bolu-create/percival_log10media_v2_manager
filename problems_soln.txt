@@ -2,3 +2,9 @@ AssertionError: Class <class 'sqlalchemy.sql.elements.SQLCoreOperations'> direct
     - This error was gotten on render. Happens when deploying
     - The fix is to simply set SQLAlchemy in requirements.txt to SQLAlchemy>=2.0.34
     - It happens due to renders python 3-13 version not being compatible with Lower SQLAlchemy versions 
+
+
+
+The job_level in the db user table needs to change to an Enum with predefined sets of levels
+
+Once KPI ismarked as completed or updated, how does the agent handle it. 
